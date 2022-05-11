@@ -16,31 +16,31 @@ export const mainListItems = (
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
-      <ListItemText primary="Dashboard" />
+      <a href="/admin-dashboard"  style={{ textDecoration: 'none', color: 'black' }}><ListItemText primary="Dashboard" /></a>
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>
-      <ListItemText primary="Conductors" />
+      <a href="/conductor-data"  style={{ textDecoration: 'none', color: 'black' }}><ListItemText primary="Conductors" /></a>
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
         <PeopleIcon />
       </ListItemIcon>
-      <ListItemText primary="Customers" />
+      <a href="/customer-data"  style={{ textDecoration: 'none', color: 'black' }}><ListItemText primary="Customers" /></a>
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
         <BarChartIcon />
       </ListItemIcon>
-      <ListItemText primary="Buses" />
+      <a href="/bus-travels"  style={{ textDecoration: 'none', color: 'black' }}><ListItemText primary="Buses" /></a>
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
         <LayersIcon />
       </ListItemIcon>
-      <ListItemText primary="Bus Travelled" />
+      <a href="/all-bus-travels"  style={{ textDecoration: 'none', color: 'black' }}><ListItemText primary="Bus Travelled" /></a>
     </ListItemButton>
   </React.Fragment>
 );

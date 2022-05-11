@@ -29,7 +29,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 
 
-export default function CustAdminDashboard() {
+export default function CondAdminDashboard() {
   
 
   return <DashboardContent />;
@@ -101,8 +101,8 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 const mdTheme = createTheme();
 
 
-function createData(username,name,phone,wallet) {
-    return { username,name,phone,wallet  }
+function createData(username,name,phone,conductorLicenseNumber) {
+    return { username,name,phone,conductorLicenseNumber  }
 }
 
   
@@ -118,7 +118,7 @@ function DashboardContent() {
   useEffect(()=>{
     const token = getToken();
     
-        const getCustomerURL = getURL()+ 'users';
+        const getCustomerURL = getURL()+ 'conductors';
         axios.get(getCustomerURL,
             {headers: {
             "Content-Type": "application/json",
@@ -226,7 +226,7 @@ function DashboardContent() {
             <TableCell align="right">Name</TableCell>
             <TableCell align="right">Phone No</TableCell>
             {/* <TableCell align="right">AAdhar No</TableCell> */}
-            <TableCell align="right">Wallet</TableCell>
+            <TableCell align="right">License Number</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -241,7 +241,7 @@ function DashboardContent() {
               </TableCell>
               <TableCell align="right">{row.name}</TableCell>
               <TableCell align="right">{row.phoneNumber}</TableCell>
-              <TableCell align="right">{row.wallet}</TableCell>
+              <TableCell align="right">{row.conductorLicenseNumber}</TableCell>
             </TableRow>
           ))}
         </TableBody>

@@ -16,6 +16,7 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+import AddMoneyToWallet from "../Payment/AddMoneyToWallet"
 
 const theme = createTheme();
 
@@ -112,7 +113,7 @@ export default function UserLogin() {
             </Button>
           </Box>
         </Box>
-        
+        <AddMoneyToWallet/>
       </Container>
     </ThemeProvider>
             </>

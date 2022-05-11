@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
+
+import jwt_decode from "jwt-decode";
 import axios from 'axios';
 import { getURL, getToken } from '../utils/index';
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
@@ -20,7 +22,7 @@ import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import { mainListItems, secondaryListItems } from './adminlistItems';
+import { mainListItems, secondaryListItems } from './conductorlistItems';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
@@ -29,7 +31,7 @@ import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
 
 
-export default function CustAdminDashboard() {
+export default function BusTravels() {
   
 
   return <DashboardContent />;
@@ -101,8 +103,8 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 const mdTheme = createTheme();
 
 
-function createData(username,name,phone,wallet) {
-    return { username,name,phone,wallet  }
+function createData(username,name,phone,conductorLicenseNumber) {
+    return { username,name,phone,conductorLicenseNumber  }
 }
 
   
@@ -114,11 +116,12 @@ function DashboardContent() {
   const toggleDrawer = () => {
     setOpen(!open);
   };
-
+var username;
   useEffect(()=>{
     const token = getToken();
-    
-        const getCustomerURL = getURL()+ 'users';
+    var decoded = jwt_decode(token);
+    username = decoded["data"]["data"]["_id"];
+        const getCustomerURL = getURL()+ 'bus-travel/conductor/' + username;
         axios.get(getCustomerURL,
             {headers: {
             "Content-Type": "application/json",
@@ -222,11 +225,11 @@ function DashboardContent() {
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Username</TableCell>
-            <TableCell align="right">Name</TableCell>
-            <TableCell align="right">Phone No</TableCell>
+            <TableCell>Bus ID</TableCell>
+            <TableCell align="right">Conductor ID</TableCell>
+            <TableCell align="right">Trip Status</TableCell>
             {/* <TableCell align="right">AAdhar No</TableCell> */}
-            <TableCell align="right">Wallet</TableCell>
+            <TableCell align="right">Start time</TableCell>
           </TableRow>
         </TableHead>
         <TableBody>
@@ -237,11 +240,11 @@ function DashboardContent() {
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
               <TableCell component="th" scope="row">
-                {row._id}
+                {row.busID}
               </TableCell>
-              <TableCell align="right">{row.name}</TableCell>
-              <TableCell align="right">{row.phoneNumber}</TableCell>
-              <TableCell align="right">{row.wallet}</TableCell>
+              <TableCell align="right">{row.conductorID}</TableCell>
+              <TableCell align="right">{row.tripStatus}</TableCell>
+              <TableCell align="right">{row.startTime}</TableCell>
             </TableRow>
           ))}
         </TableBody>

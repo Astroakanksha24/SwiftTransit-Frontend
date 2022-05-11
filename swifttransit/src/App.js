@@ -12,7 +12,10 @@ import AdminDashboard from './Main/AdminDashboard';
 import ConductorDashboard from './Main/ConductorDashboard';
 import SyncTable from './Main/AdminTable'
 import CustAdminDashboard from './Main/CustomerData'
-import QrContainer from './Main/Components/scanner';
+import ScannerApp from './Main/Components/scanner';
+import CondAdminDashboard from './Main/ConductorData';
+import BusTravels from './Main/BusTravels';
+import AllBusTravels from './Main/AllBusTravels';
 
 //import Main from './Main/Landing';
 function App() {
@@ -32,9 +35,12 @@ function App() {
               <Route exact path="/user-dashboard" element={<UserDashboard/>} />
               <Route exact path="/admin-dashboard" element={<AdminDashboard/>} />
               <Route exact path="/conductor-dashboard" element={<ConductorDashboard/>} />
-              <Route exact path="/CustAdminDashboard" element={<CustAdminDashboard/>} />
+              <Route exact path="/customer-data" element={<CustAdminDashboard/>} />
+              <Route exact path="/conductor-data" element={<CondAdminDashboard/>} />
               <Route exact path="/admin-table" element={<SyncTable/>} />
-              <Route exact path="/scanner" element={<QrContainer/>} />
+              <Route exact path="/scanner" element={<ScannerApp/>} />
+              <Route exact path="/bus-travels" element={<BusTravels/>} />
+              <Route exact path="/all-bus-travels" element={<AllBusTravels/>} />
             </Routes>
             
           </div>

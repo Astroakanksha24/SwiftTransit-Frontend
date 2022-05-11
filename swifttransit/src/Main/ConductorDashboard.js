@@ -2,6 +2,7 @@ import * as React from 'react';
 import { useEffect, useState } from 'react';
 import jwt_decode from "jwt-decode";
 import axios from 'axios';
+import './styles.css'
 import { getURL, getToken } from '../utils/index';
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
 import CssBaseline from '@mui/material/CssBaseline';
@@ -21,11 +22,12 @@ import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
-import { mainListItems, secondaryListItems } from './listItems';
+import { mainListItems, secondaryListItems } from './conductorlistItems';
 import InputLabel from '@mui/material/InputLabel';
 import MenuItem from '@mui/material/MenuItem';
 import FormControl from '@mui/material/FormControl';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Button from '@mui/material/Button';
 // import Chart from './Chart';
 // import Deposits from './Deposits';
 // import Orders from './Orders';
@@ -92,11 +94,109 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 const mdTheme = createTheme();
 
 function DashboardContent() {
+  var username;
   const [open, setOpen] = React.useState(true);
+  const [theBusId, setTheBusId] = useState("")
   const toggleDrawer = () => {
     setOpen(!open);
   };
-/*
+
+  const [Buses, setBuses] = useState([])
+  useEffect(()=>{
+    console.log("im in main");
+    const token = getToken();
+    var decoded = jwt_decode(token);
+    username = decoded["data"]["data"]["_id"];
+    console.log(username);
+        const getConductorURL = getURL()+ 'conductors';
+        axios.get(getConductorURL,
+            {headers: {
+            "Content-Type": "application/json",
+            "authorization": `${token}`
+        }})
+        .then(res => {
+            console.log(res.data);
+            console.log("run");
+            const getBusesURL = getURL()+ 'buses/buses';
+            axios.get(getBusesURL,
+                {headers: {
+                "Content-Type": "application/json",
+                "authorization": `${token}`
+            }})
+            .then(res => {
+                console.log(res.data);
+                setBuses(res.data);
+                console.log("run");
+                
+            })
+            .catch((err) => {
+                console.log(err.message);
+                if(err.message==="Request failed with status code 401")
+                {
+                    alert("Something went wrong");
+      
+        return;
+                }
+            }
+
+            )
+            
+        })
+        .catch((err) => {
+            console.log(err.message);
+            if(err.message==="Request failed with status code 401")
+            {
+                alert("Something went wrong");
+   
+    return;
+            }
+        }
+
+        )    
+},[]);
+
+const handleBusSelect = ((e) => {
+  setTheBusId(e.target.value);
+});
+
+const addBusTravel = e => {
+  const d = new Date();
+  e.preventDefault();
+  const thatURL = getURL() + "bus-travel";
+  const token = getToken();
+    var decoded = jwt_decode(token);
+    username = decoded["data"]["data"]["_id"];
+  axios.post(
+      thatURL,
+      {
+          busID: theBusId,
+          conductorID: username,
+          startTime: d.getTime()
+      },
+      {
+          headers: {
+              "Content-Type": "application/json",
+          },
+      }
+  )
+  .then((response) => {
+     if (response.status === 201) {
+          const data = response.data;
+          console.log(data);
+          }
+  })
+  .catch((err) => {
+      
+      if(err.response.status==404)
+      {
+        console.log(err.message);
+        alert("Invalid credentials");
+      }
+      
+  });
+};
+
+
   return (
     <ThemeProvider theme={mdTheme}>
       <Box sx={{ display: 'flex' }}>
@@ -170,19 +270,28 @@ function DashboardContent() {
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
-            <FormControl fullWidth>
-  <InputLabel id="demo-simple-select-label">Bus ID</InputLabel>
+            <FormControl className='bus_select'>
+  <InputLabel id="demo-simple-select-label" className='bus_id' >Bus ID</InputLabel>
   <Select
     labelId="demo-simple-select-label"
     id="demo-simple-select"
-    value={theBusId}
+    
+    onChange={handleBusSelect}
     label="Bus ID"
-    onChange={setTheBusId}
   >
-    <MenuItem value={10}>Ten</MenuItem>
+    {Buses.map((value, key) => {
+            return (
+              <MenuItem value={value._id} key={key}>
+                {value._id}
+              </MenuItem>
+            );
+          })}
+    {/*<MenuItem value={10}>Ten</MenuItem>
     <MenuItem value={20}>Twenty</MenuItem>
-    <MenuItem value={30}>Thirty</MenuItem>
+        <MenuItem value={30}>Thirty</MenuItem>*/}
   </Select>
+  <br></br>
+  <Button variant="contained" onClick={addBusTravel}>Start Trip</Button>
 </FormControl>
               
               
@@ -192,64 +301,13 @@ function DashboardContent() {
         </Box>
       </Box>
     </ThemeProvider>
-  );*/
+  );
 }
 
 
 export default function ConductorDashboard() {
-  const [theBusId, setTheBusId] = useState("")
   
-  useEffect(()=>{
-    console.log("im in main");
-    const token = getToken();
-    var decoded = jwt_decode(token);
-    const username = decoded["data"]["data"]["_id"];
-    console.log(username);
-        const getConductorURL = getURL()+ 'conductors';
-        axios.get(getConductorURL,
-            {headers: {
-            "Content-Type": "application/json",
-            "authorization": `${token}`
-        }})
-        .then(res => {
-            console.log(res.data);
-            console.log("run");
-            const getBusesURL = getURL()+ 'buses/buses';
-            axios.get(getBusesURL,
-                {headers: {
-                "Content-Type": "application/json",
-                "authorization": `${token}`
-            }})
-            .then(res => {
-                console.log(res.data);
-                console.log("run");
-                
-            })
-            .catch((err) => {
-                console.log(err.message);
-                if(err.message==="Request failed with status code 401")
-                {
-                    alert("Something went wrong");
-      
-        return;
-                }
-            }
-
-            )
-            
-        })
-        .catch((err) => {
-            console.log(err.message);
-            if(err.message==="Request failed with status code 401")
-            {
-                alert("Something went wrong");
-   
-    return;
-            }
-        }
-
-        )    
-},[]);
+  
 
   return <DashboardContent />;
 }
