@@ -19,6 +19,7 @@ import AllBusTravels from './Main/AllBusTravels';
 import ParticularTravel from './Main/ParticularTravel';
 import Generator from './Main/Components/Generator';
 import WithRoot from './Landing/Home'
+
 import BookTicketWallet from './Main/BookTicketWallet'
 import BookTicketCash from './Main/BookTicketCash'
 import BookTicketSMS from './Main/BookTicketSMS'
@@ -26,6 +27,10 @@ import BookTicketSMS from './Main/BookTicketSMS'
 import BookPassWallet from './Main/BookPassWallet'
 import BookPassCash from './Main/BookPassCash'
 import BookPassSMS from './Main/BookPassSMS'
+
+import UserScanCash from './Main/UserScanCash'
+import UserScanWallet from './Main/UserScanWallet'
+
 
 //import Main from './Main/Landing';
 function App() {
@@ -52,12 +57,16 @@ function App() {
               <Route exact path="/bus-travels" element={<BusTravels/>} />
               <Route exact path="/bus-travel/:id" element={<ParticularTravel/>} />
               <Route exact path="/all-bus-travels" element={<AllBusTravels/>} />
-              <Route exact path="/book-ticket-wallet" element={<BookTicketWallet/>} />
-              <Route exact path="/book-ticket-sms" element={<BookTicketSMS/>} />
-              <Route exact path="/book-ticket-cash" element={<BookTicketCash/>} />
-              <Route exact path="/book-pass-wallet" element={<BookPassWallet/>} />
-              <Route exact path="/book-pass-sms" element={<BookPassSMS/>} />
-              <Route exact path="/book-pass-cash" element={<BookPassCash/>} />
+              <Route exact path="/bus-travel/:id/book-ticket-wallet" element={<BookTicketWallet/>} />
+              <Route exact path="/bus-travel/:id/book-ticket-sms" element={<BookTicketSMS/>} />
+              <Route exact path="/bus-travel/:id/book-ticket-cash" element={<BookTicketCash/>} />
+              <Route exact path="/bus-travel/:id/book-pass-wallet" element={<BookPassWallet/>} />
+              <Route exact path="/bus-travel/:id/book-pass-sms" element={<BookPassSMS/>} />
+              <Route exact path="/bus-travel/:id/book-pass-cash" element={<BookPassCash/>} />
+
+              <Route exact path="/user/scan-cash" element={<UserScanCash/>} />
+              <Route exact path="/user/scan-wallet" element={<UserScanWallet/>} />
+
             </Routes>
             
           </div>

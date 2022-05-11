@@ -116,7 +116,10 @@ function createData(username,name,phone,conductorLicenseNumber) {
     return { username,name,phone,conductorLicenseNumber  }
 }
 
-  
+const logoutHandler = () => {
+    localStorage.setItem("token", "")
+    window.location = "/";
+  }
 
 
 function DashboardContent() {
@@ -188,11 +191,7 @@ var username;
             >
               Dashboard
             </Typography>
-            <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
+            <p onClick={logoutHandler} style={{cursor: 'pointer'}}>Logout</p>
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>
@@ -247,22 +246,14 @@ var username;
                   }}
                 >
                 <h5>Book Ticket</h5>
-    
-                 <a href="">Book Ticket with Wallet</a> <br />
+                 <a href={"/bus-travel/"+travel_id+"/"+"book-ticket-wallet"}>Book Ticket with Wallet</a> <br />
+                 <a href={"/bus-travel/"+travel_id+"/"+"book-ticket-sms"}>Book Ticket with SMS</a> <br />
+                 <a href={"/bus-travel/"+travel_id+"/"+"book-ticket-cash"}>Book Ticket with Cash</a> <br /><br />
+                 <h5>Book Day Pass</h5>
+                 <a href={"/bus-travel/"+travel_id+"/"+"book-pass-wallet"}>Book Pass with Wallet</a> <br />
+                 <a href={"/bus-travel/"+travel_id+"/"+"book-pass-sms"}>Book Pass with SMS</a> <br />
+                 <a href={"/bus-travel/"+travel_id+"/"+"book-pass-cash"}>Book Pass with Cash</a> <br />
 
-                 <a href="">Book Ticket with Cash</a> <br />
-
-                 <a href="">Book Ticket with SMS</a> <br />
-
-                <br />
-
-                <h5>Book Day Pass</h5>
-    
-                 <a href="">Book Pass with Wallet</a> <br />
-
-                 <a href="">Book Pass with Cash</a> <br />
-
-                 <a href="">Book Pass with SMS</a> <br />
                  
                 </Paper>
               </Grid>

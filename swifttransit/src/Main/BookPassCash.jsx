@@ -1,14 +1,13 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import axios from 'axios';
-import { getURL } from '../utils/index';
+import { getURL, getToken } from '../utils/index';
 import Avatar from '@mui/material/Avatar';
 import Button from '@mui/material/Button';
 import CssBaseline from '@mui/material/CssBaseline';
 import TextField from '@mui/material/TextField';
 import FormControlLabel from '@mui/material/FormControlLabel';
 import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
 import Grid from '@mui/material/Grid';
 import Box from '@mui/material/Box';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
@@ -16,34 +15,42 @@ import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
 
+import {
+  BrowserRouter as Router,
+  Switch,
+  Route,
+  Link,
+  useParams
+} from "react-router-dom";
+import Generator from './Components/Generator';
 
 const theme = createTheme();
 
+var travel_id;
+
 export default function BookPassCash() {
 
+  let { id } = useParams();
+    travel_id=id;
 
-   const [thePassword, setThePassword] = useState("")
-   const [theUsername, setTheUsername] = useState("")
-   const [theName, setTheName] = useState("")
-   const [theEmail, setTheEmail] = useState("")
-   const [thePhoneNo, setThePhoneNo] = useState("")
-   const [theAdhaar, setTheAdhaar] = useState("")
+
+   const [theQty, setTheQty] = useState(1)
+   const [theTicketID, setTheTicketID] = useState("")
 
     const submitForm = e => {
       e.preventDefault();
-      const thatURL = getURL() + "user-registration";
-      console.log(theUsername)
+      const thatURL = getURL() + "bus-travel-ticket/create-ticket-by-conductor-cash";
       axios.post(
           thatURL,
           {
-              username: theUsername,
-              password: thePassword,
-              name: theName,
-              phoneNumber: thePhoneNo,
-              aadharNumber: theAdhaar,
-              email: theEmail
-            
-          },
+            "busTravelID": travel_id,
+            "quantity": 1,
+            "isDayPass": true,
+            "price": 50*theQty,
+            "source": "",
+            "destination": "",
+            "perTicketCost": 50
+        },
           {
               headers: {
                   "Content-Type": "application/json",
@@ -51,22 +58,14 @@ export default function BookPassCash() {
           }
       )
       .then((response) => {
-          console.log(response);
          if (response.status === 201) {
-              const data = response.data;
-             console.log("signup");
-              localStorage.setItem("token", data.token);
-              window.location = "/";
-              }
+            const data = response.data;
+            setTheTicketID(data['id'])
+            return;
+          }
       })
       .catch((err) => {
-          
-          if(err.status==="Request failed with status code 401")
-          {
-            console.log(err.message);
-            alert("User already exists");
-          }
-          
+         console.log(err)
       });
   };
 
@@ -87,77 +86,13 @@ export default function BookPassCash() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Create Ticket
+            Book Daily Pass With Cash
           </Typography>
           <Box component="form" onSubmit={submitForm} noValidate sx={{ mt: 1 }}>
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              id="username"
-              label="Username"
-              name="username"
-              autoComplete="email"
-              autoFocus
-              onChange={(e)=>setTheUsername(e.target.value)} 
-              value={theUsername}          
-              />
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="password"
-              label="Password"
-              type="password"
-              id="password"
-              autoComplete="current-password"
-              onChange={(e)=>setThePassword(e.target.value)} value={thePassword}   
-              />
-
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="email"
-              label="Email"
-              type="email"
-              id="email"
-              onChange={(e)=>setTheEmail(e.target.value)} value={theEmail}   
-              />
-
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="name"
-              label="Name"
-              type="name"
-              id="name"
-              onChange={(e)=>setTheName(e.target.value)} value={theName}   
-              />
-
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="phoneNumber"
-              label="Phone Number"
-              type="phoneNumber"
-              id="phoneNumber"
-              onChange={(e)=>setThePhoneNo(e.target.value)} value={thePhoneNo}   
-              />
-
-            <TextField
-              margin="normal"
-              required
-              fullWidth
-              name="aadharNumber"
-              label="Aadhar Number"
-              type="aadharNumber"
-              id="aadharNumber"
-              onChange={(e)=>setTheAdhaar(e.target.value)} 
-              value={theAdhaar}   
-              />
+            
+          <TextField inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} onChange={(e)=>{
+            setTheQty(e.target.value)
+          }} required={true} value={theQty} label="Quantity" />
 
             <Button
               type="submit"
@@ -166,10 +101,15 @@ export default function BookPassCash() {
               value="Signup"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign Up
+              Book
             </Button>
             
           </Box>
+          <br />
+          <br />
+          {theTicketID.length>0 ? <>
+            <Generator text={theTicketID} />
+          </> : <></>}
         </Box>
         
       </Container>

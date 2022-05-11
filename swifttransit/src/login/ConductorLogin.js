@@ -46,7 +46,7 @@ export default function ConductorLogin() {
               const data = response.data;
              console.log("login");
               localStorage.setItem("token", data.token);
-              window.location = "/admin-dashboard";
+              window.location = "/conductor-dashboard";
               }
       })
       .catch((err) => {

@@ -1,9 +1,9 @@
-import React, {useState, useRef} from 'react';
+import React, {useState, useRef, useEffect} from 'react';
 import { TextField, Button } from '@mui/material';
 import QRCode from "qrcode";
 
-export default function Generator() {
-  const [text, setText] = useState('');
+export default function Generator(props) {
+  const text = props.text;
   const [imageUrl, setImageUrl] = useState('');
   const generateQrCode = async () => {
     try {
@@ -13,18 +13,16 @@ export default function Generator() {
       console.log(error);
     }
   }
+
+  useEffect(()=>{
+    generateQrCode();
+  }, [])
   return (
     <container>
-                 <TextField label="Enter Text Here" onChange={(e) => setText(e.target.value)}/>
-                          <Button  variant="contained" 
-                             color="primary" onClick={() => generateQrCode()}>Generate</Button>
-                             <br/>
-                             <br/>
-                             <br/>
-                             {imageUrl ? (
-                               <a href={imageUrl} download>
-                                   <img src={imageUrl} alt="img"/>
-                             </a>) : null}
+      {imageUrl ? (
+        <a href={imageUrl} download>
+            <img src={imageUrl} alt="img"/>
+      </a>) : null}
   </container>
   )
 }

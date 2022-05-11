@@ -9,6 +9,8 @@ import PeopleIcon from '@mui/icons-material/People';
 import BarChartIcon from '@mui/icons-material/BarChart';
 import LayersIcon from '@mui/icons-material/Layers';
 import AssignmentIcon from '@mui/icons-material/Assignment';
+import MoneyIcon from '@mui/icons-material/Money';
+import AccountBalanceWalletIcon from '@mui/icons-material/AccountBalanceWallet';
 
 export const mainListItems = (
   <React.Fragment>
@@ -18,19 +20,19 @@ export const mainListItems = (
       </ListItemIcon>
       <a href="/user-dashboard"  style={{ textDecoration: 'none', color: 'black' }}><ListItemText primary="Dashboard" /></a>
     </ListItemButton>
-    {/* <ListItemButton>
+     <ListItemButton>
       <ListItemIcon>
-        <PeopleIcon />
+        <MoneyIcon />
       </ListItemIcon>
-      <a href="/conductor-data"  style={{ textDecoration: 'none', color: 'black' }}><ListItemText primary="Conductors" /></a>
+      <a href="/user-scanner-cash"  style={{ textDecoration: 'none', color: 'black' }}><ListItemText primary="Scan for cash" /></a>
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
-        <PeopleIcon />
+        <AccountBalanceWalletIcon />
       </ListItemIcon>
-      <a href="/customer-data"  style={{ textDecoration: 'none', color: 'black' }}><ListItemText primary="Customers" /></a>
+      <a href="/user-scanner-wallet"  style={{ textDecoration: 'none', color: 'black' }}><ListItemText primary="Scan for wallet" /></a>
     </ListItemButton>
-    <ListItemButton>
+    {/*<ListItemButton>
       <ListItemIcon>
         <BarChartIcon />
       </ListItemIcon>

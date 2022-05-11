@@ -220,6 +220,20 @@ function DashboardContent() {
                 <AddMoneyToWallet/>
                 </Paper>
               </Grid>
+
+              <Grid item xs={12} md={12} lg={12}>
+                <Paper
+                  sx={{
+                    p: 2,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    height: 240,
+                  }}
+                >
+                  <h3><a href="/user/scan-cash">Scan For Cash</a></h3>
+                  <h3><a href="/user/scan-wallet">Scan For Wallet</a></h3>
+                </Paper>
+              </Grid>
            
               {/* <Grid item xs={12} md={4} lg={3}>
                 <Paper

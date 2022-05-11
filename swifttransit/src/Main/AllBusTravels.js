@@ -106,7 +106,10 @@ const mdTheme = createTheme();
 function createData(username,name,phone,conductorLicenseNumber) {
     return { username,name,phone,conductorLicenseNumber  }
 }
-
+const logoutHandler = () => {
+  localStorage.setItem("token", "")
+  window.location = "/";
+}
   
 
 
@@ -179,11 +182,7 @@ var username;
             >
               Dashboard
             </Typography>
-            <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
+            <p onClick={logoutHandler} style={{cursor: 'pointer'}}>Logout</p>
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>

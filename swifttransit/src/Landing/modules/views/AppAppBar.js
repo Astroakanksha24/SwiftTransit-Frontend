@@ -3,6 +3,11 @@ import Box from '@mui/material/Box';
 import Link from '@mui/material/Link';
 import AppBar from '../components/AppBar';
 import Toolbar from '../components/Toolbar';
+// import myimg from 'public/ST.png'
+
+// import image from '/ST.png'
+
+
 
 const rightLink = {
   fontSize: 16,
@@ -16,6 +21,10 @@ function AppAppBar() {
       <AppBar position="fixed">
         <Toolbar sx={{ justifyContent: 'space-between' }}>
           <Box sx={{ flex: 1 }} />
+
+          {/* <img src={image}/> */}
+          <img src="./ST.png"/>
+          
           <Link
             // variant="h6"
             underline="none"

@@ -105,6 +105,10 @@ function createData(username,name,phone,wallet) {
     return { username,name,phone,wallet  }
 }
 
+const logoutHandler = () => {
+  localStorage.setItem("token", "")
+  window.location = "/";
+}
   
 
 
@@ -176,11 +180,7 @@ function DashboardContent() {
             >
               Dashboard
             </Typography>
-            <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
+            <p onClick={logoutHandler} style={{cursor: 'pointer'}}>Logout</p>
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>
