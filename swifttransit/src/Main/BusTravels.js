@@ -231,6 +231,7 @@ var username;
             {/* <TableCell align="right">AAdhar No</TableCell> */}
             <TableCell align="right">Start time</TableCell>
           </TableRow>
+         
         </TableHead>
         <TableBody>
           {rows.map((row) => (
@@ -239,13 +240,14 @@ var username;
               key={row.name}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
+            
               <TableCell component="th" scope="row">
-                {row.busID}
+                <a href={"/bus-travel/"+row['_id']}>{row.busID}</a>
               </TableCell>
               <TableCell align="right">{row.conductorID}</TableCell>
               <TableCell align="right">{row.tripStatus}</TableCell>
               <TableCell align="right">{row.startTime}</TableCell>
-            </TableRow>
+            </TableRow> 
           ))}
         </TableBody>
       </Table>

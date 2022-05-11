@@ -1,30 +1,26 @@
 import React, { useState } from 'react';
-import QrReader from 'react-qr-scanner';
+import { QrReader } from 'react-qr-reader';
 
 
-function ScannerApp()
-{
-    const  setScanResultWebCam =  useState('');
 
-     
-      const handleErrorWebCam = (error) => {
-        console.log(error);
-      }
-      const handleScanWebCam = (result) => {
-        if (result){
-            setScanResultWebCam(result);
-            console.log(result);
-        }
-     
-    }
-    return(
-        <QrReader
-        delay={300}
-        style={{width: '100%'}}
-        onError={handleErrorWebCam}
-        onScan={handleScanWebCam}
-        />
-       
-    );
-}
-export default ScannerApp;
+export default function Scanner(props){
+  const [data, setData] = useState('No result');
+
+  return (
+    <>
+      <QrReader
+        onResult={(result, error) => {
+          if (!!result) {
+            setData(result?.text);
+          }
+
+          if (!!error) {
+            console.info(error);
+          }
+        }}
+        style={{ width: '80vw', height: '80vh' }}
+      />
+      <p>{data}</p>
+    </>
+  );
+};

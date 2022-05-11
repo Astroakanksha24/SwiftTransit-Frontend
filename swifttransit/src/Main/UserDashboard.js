@@ -21,7 +21,9 @@ import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
 import { mainListItems, secondaryListItems } from './userlistItems';
-
+import axios from 'axios';
+import jwt_decode from "jwt-decode";
+import AddMoneyToWallet from "../Payment/AddMoneyToWallet"
 // import Chart from './Chart';
 // import Deposits from './Deposits';
 // import Orders from './Orders';
@@ -92,6 +94,26 @@ function DashboardContent() {
   const toggleDrawer = () => {
     setOpen(!open);
   };
+  const [userData, setUserData] = useState({})
+
+  React.useEffect(()=>{
+    const token = getToken();
+    var decoded = jwt_decode(token)
+    let username = decoded["data"]["data"]["_id"];
+    axios.get(`${getURL()}users/user/${username}`)
+    .then((res)=>{
+      let data = res.data;
+      setUserData(data)
+    })
+    .catch((err)=>{
+      console.log(err)
+    })
+  }, [])
+
+  const logoutHandler = () => {
+      localStorage.setItem("token", "")
+      window.location = "/";
+  }
 
   return (
     <ThemeProvider theme={mdTheme}>
@@ -124,11 +146,8 @@ function DashboardContent() {
             >
               Dashboard
             </Typography>
-            <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
+            
+              <p onClick={logoutHandler}>Logout</p>
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>
@@ -166,8 +185,8 @@ function DashboardContent() {
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
-              {/* Chart */}
-              <Grid item xs={12} md={8} lg={9}>
+           
+              <Grid item xs={12} md={12} lg={12}>
                 <Paper
                   sx={{
                     p: 2,
@@ -176,11 +195,19 @@ function DashboardContent() {
                     height: 240,
                   }}
                 >
-                  {/* <Chart /> */}
+                 <h3>Hello, {userData['name']}</h3>
+                 <p>
+                   Email - {userData['email']}<br />
+                   Phone Number - {userData['phoneNumber']}<br />
+                   Aadhar Number - {userData['aadharNumber']}<br />
+                 </p>
+
+                 <h2>Wallet Balance - {userData['wallet']}</h2>
+
                 </Paper>
               </Grid>
-              {/* Recent Deposits */}
-              <Grid item xs={12} md={4} lg={3}>
+
+              <Grid item xs={12} md={12} lg={12}>
                 <Paper
                   sx={{
                     p: 2,
@@ -189,15 +216,29 @@ function DashboardContent() {
                     height: 240,
                   }}
                 >
-                  {/* <Deposits /> */}
+                  <h4>Fill Your Wallet</h4>
+                <AddMoneyToWallet/>
                 </Paper>
               </Grid>
-              {/* Recent Orders */}
-              <Grid item xs={12}>
+           
+              {/* <Grid item xs={12} md={4} lg={3}>
+                <Paper
+                  sx={{
+                    p: 2,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    height: 240,
+                  }}
+                >
+                 
+                </Paper>
+              </Grid> */}
+             
+              {/* <Grid item xs={12}>
                 <Paper sx={{ p: 2, display: 'flex', flexDirection: 'column' }}>
-                  {/* <Orders /> */}
+                  
                 </Paper>
-              </Grid>
+              </Grid> */}
             </Grid>
             <Copyright sx={{ pt: 4 }} />
           </Container>

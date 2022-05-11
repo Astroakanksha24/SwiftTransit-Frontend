@@ -23,7 +23,7 @@ export default function AddMoneyToWallet(props) {
       axios.post(
           thatURL,
           {
-            amount,
+            amount: parseInt(amount),
             userID: username,
           },
           {
@@ -45,7 +45,6 @@ export default function AddMoneyToWallet(props) {
          alert("Some Error Occurred");
       });
   }
-
 
   const Razorpay = useRazorpay();
 

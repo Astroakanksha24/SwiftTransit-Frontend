@@ -32,10 +32,16 @@ export const mainListItems = (
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
+        <LayersIcon />
+      </ListItemIcon>
+      <a href="/create-conductor"  style={{ textDecoration: 'none', color: 'black' }}><ListItemText primary="Add Conductors" /></a>
+    </ListItemButton>
+    {/* <ListItemButton>
+      <ListItemIcon>
         <BarChartIcon />
       </ListItemIcon>
       <a href="/bus-travels"  style={{ textDecoration: 'none', color: 'black' }}><ListItemText primary="Buses" /></a>
-    </ListItemButton>
+    </ListItemButton> */}
     <ListItemButton>
       <ListItemIcon>
         <LayersIcon />

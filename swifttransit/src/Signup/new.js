@@ -19,21 +19,28 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const theme = createTheme();
 
-export default function UserLogin() {
+export default function CreateConductor() {
 
 
    const [thePassword, setThePassword] = useState("")
    const [theUsername, setTheUsername] = useState("")
+   const [theName, setTheName] = useState("")
+   const [theLicense, setTheLicense] = useState("")
+   const [thePhoneNo, setThePhoneNo] = useState("")
 
     const submitForm = e => {
       e.preventDefault();
-      const thatURL = getURL() + "user-login";
+      const thatURL = getURL() + "create-conductor";
       console.log(theUsername)
       axios.post(
           thatURL,
           {
               username: theUsername,
               password: thePassword,
+              name: theName,
+              phoneNumber: thePhoneNo,
+              conductorLicenseNumber: theLicense
+            
           },
           {
               headers: {
@@ -42,19 +49,20 @@ export default function UserLogin() {
           }
       )
       .then((response) => {
+          console.log(response);
          if (response.status === 201) {
               const data = response.data;
-             console.log("login");
+             console.log("Created");
               localStorage.setItem("token", data.token);
-              window.location = "/user-dashboard";
+              window.location = "/";
               }
       })
       .catch((err) => {
           
-          if(err.response.status==404)
+          if(err.status==="Request failed with status code 401")
           {
             console.log(err.message);
-            alert("Invalid credentials");
+            alert("User already exists");
           }
           
       });
@@ -77,7 +85,7 @@ export default function UserLogin() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign in
+            Create Conductor
           </Typography>
           <Box component="form" onSubmit={submitForm} noValidate sx={{ mt: 1 }}>
             <TextField
@@ -87,11 +95,41 @@ export default function UserLogin() {
               id="username"
               label="Username"
               name="username"
-              autoComplete="email"
               autoFocus
-              onChange={(e)=>setTheUsername(e.target.value)} value={theUsername}          
+              onChange={(e)=>setTheUsername(e.target.value)} 
+              value={theUsername}          
               />
             <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="Name"
+              label="Name"
+              id="Name"
+              onChange={(e)=>setTheName(e.target.value)} value={theName}   
+              />
+
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="License"
+              label="License Number"
+              id="License"
+              onChange={(e)=>setTheLicense(e.target.value)} value={theLicense}   
+              />
+
+            <TextField
+              margin="normal"
+              required
+              fullWidth
+              name="PhoneNo"
+              label="Phone Number"
+              id="PhoneNo"
+              onChange={(e)=>setThePhoneNo(e.target.value)} value={thePhoneNo}   
+              />
+
+             <TextField
               margin="normal"
               required
               fullWidth
@@ -102,16 +140,20 @@ export default function UserLogin() {
               autoComplete="current-password"
               onChange={(e)=>setThePassword(e.target.value)} value={thePassword}   
               />
+
             <Button
               type="submit"
               fullWidth
               variant="contained"
+              value="Signup"
               sx={{ mt: 3, mb: 2 }}
             >
-              Sign In
+               Create Conductor
             </Button>
+            
           </Box>
         </Box>
+        
       </Container>
     </ThemeProvider>
             </>

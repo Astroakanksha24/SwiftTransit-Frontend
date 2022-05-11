@@ -18,21 +18,30 @@ import Badge from '@mui/material/Badge';
 import Container from '@mui/material/Container';
 import Grid from '@mui/material/Grid';
 import Paper from '@mui/material/Paper';
-import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import { mainListItems, secondaryListItems } from './conductorlistItems';
 import Table from '@mui/material/Table';
 import TableBody from '@mui/material/TableBody';
 import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import { mainListItems, secondaryListItems } from './adminlistItems';
+import Button from '@mui/material/Button';
+import {
+    BrowserRouter as Router,
+    Switch,
+    Route,
+    Link,
+    useParams
+  } from "react-router-dom";
+var travel_id;
+export default function ParticularTravel() {
 
-
-export default function AllBusTravels() {
-  
+    let { id } = useParams();
+    travel_id=id;
+    console.log(id)
 
   return <DashboardContent />;
 }
@@ -121,7 +130,7 @@ var username;
     const token = getToken();
     var decoded = jwt_decode(token);
     username = decoded["data"]["data"]["_id"];
-        const getCustomerURL = getURL()+ 'bus-travel';
+        const getCustomerURL = getURL()+ 'bus-travel/all-details/' + travel_id;
         axios.get(getCustomerURL,
             {headers: {
             "Content-Type": "application/json",
@@ -130,7 +139,7 @@ var username;
         .then(res => {
             console.log(res.data);
             const data=res.data;
-            setrows(data);
+            setrows(data["smartTickets"]);
             console.log(rows);
             console.log("run");
             
@@ -220,17 +229,26 @@ var username;
         >
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+          
             <Grid container spacing={3}>
+            
+<a variant="contained" href="/book-ticket" type="button">Book ticket</a><br></br>
 <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell>Bus ID</TableCell>
-            <TableCell align="right">Conductor ID</TableCell>
-            <TableCell align="right">Trip Status</TableCell>
-            {/* <TableCell align="right">AAdhar No</TableCell> */}
-            <TableCell align="right">Start time</TableCell>
+            <TableCell align="right">Travel ID</TableCell>
+            <TableCell align="right">busTravelID</TableCell>
+            <TableCell align="right">quantity</TableCell>
+            <TableCell align="right">isDayPass</TableCell>
+            <TableCell align="right">price</TableCell>
+            <TableCell align="right">source</TableCell>
+            <TableCell align="right">destination</TableCell>
+            <TableCell align="right">perTicketCost</TableCell>
+            <TableCell align="right">isWallet</TableCell>
+            <TableCell align="right">ticketStatus</TableCell>
           </TableRow>
+         
         </TableHead>
         <TableBody>
           {rows.map((row) => (
@@ -239,13 +257,20 @@ var username;
               key={row.name}
               sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
             >
+            
               <TableCell component="th" scope="row">
-                {row.busID}
+                {row._id}
               </TableCell>
-              <TableCell align="right">{row.conductorID}</TableCell>
-              <TableCell align="right">{row.tripStatus}</TableCell>
-              <TableCell align="right">{row.startTime}</TableCell>
-            </TableRow>
+            <TableCell align="right">{row.busTravelID}</TableCell>
+            <TableCell align="right">{row.quantity}</TableCell>
+            <TableCell align="right">{row.isDayPass}</TableCell>
+            <TableCell align="right">{row.price}</TableCell>
+            <TableCell align="right">{row.source}</TableCell>
+            <TableCell align="right">{row.destination}</TableCell>
+            <TableCell align="right">{row.perTicketCost}</TableCell>
+            <TableCell align="right">{row.isWallet}</TableCell>
+            <TableCell align="right">{row.ticketStatus}</TableCell>
+            </TableRow> 
           ))}
         </TableBody>
       </Table>
