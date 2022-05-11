@@ -16,7 +16,7 @@ export const mainListItems = (
       <ListItemIcon>
         <DashboardIcon />
       </ListItemIcon>
-      <a href="/admin-dashboard"  style={{ textDecoration: 'none', color: 'black' }}><ListItemText primary="Dashboard" /></a>
+      <a href="/user-dashboard"  style={{ textDecoration: 'none', color: 'black' }}><ListItemText primary="Dashboard" /></a>
     </ListItemButton>
     {/* <ListItemButton>
       <ListItemIcon>

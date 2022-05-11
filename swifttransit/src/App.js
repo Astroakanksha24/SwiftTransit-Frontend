@@ -18,20 +18,24 @@ import BusTravels from './Main/BusTravels';
 import AllBusTravels from './Main/AllBusTravels';
 import ParticularTravel from './Main/ParticularTravel';
 import Generator from './Main/Components/Generator';
-import home from './Landing/index'
-import BookTicket from './Main/BookTicket';
+import WithRoot from './Landing/Home'
+import BookTicketWallet from './Main/BookTicketWallet'
+import BookTicketCash from './Main/BookTicketCash'
+import BookTicketSMS from './Main/BookTicketSMS'
 
+import BookPassWallet from './Main/BookPassWallet'
+import BookPassCash from './Main/BookPassCash'
+import BookPassSMS from './Main/BookPassSMS'
 
 //import Main from './Main/Landing';
 function App() {
     
   return (
       <div>
-        
         <Router>
           <div>
             <Routes>
-            <Route exact path="/" element={<home/>} />
+            <Route exact path="/" element={<WithRoot/>} />
               <Route exact path="/conductor-login" element={<ConductorLogin/>} />
               <Route exact path="/user-login" element={<UserLogin/>} />
               <Route exact path="/admin-login" element={<AdminLogin/>} />
@@ -48,7 +52,12 @@ function App() {
               <Route exact path="/bus-travels" element={<BusTravels/>} />
               <Route exact path="/bus-travel/:id" element={<ParticularTravel/>} />
               <Route exact path="/all-bus-travels" element={<AllBusTravels/>} />
-              <Route exact path="/book-ticket" element={<BookTicket/>} />
+              <Route exact path="/book-ticket-wallet" element={<BookTicketWallet/>} />
+              <Route exact path="/book-ticket-sms" element={<BookTicketSMS/>} />
+              <Route exact path="/book-ticket-cash" element={<BookTicketCash/>} />
+              <Route exact path="/book-pass-wallet" element={<BookPassWallet/>} />
+              <Route exact path="/book-pass-sms" element={<BookPassSMS/>} />
+              <Route exact path="/book-pass-cash" element={<BookPassCash/>} />
             </Routes>
             
           </div>

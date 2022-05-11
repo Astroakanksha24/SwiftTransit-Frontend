@@ -196,6 +196,11 @@ const addBusTravel = e => {
   });
 };
 
+const logoutHandler = () => {
+  localStorage.setItem("token", "")
+  window.location = "/";
+}
+
 
   return (
     <ThemeProvider theme={mdTheme}>
@@ -228,11 +233,7 @@ const addBusTravel = e => {
             >
               Dashboard
             </Typography>
-            <IconButton color="inherit">
-              <Badge badgeContent={4} color="secondary">
-                <NotificationsIcon />
-              </Badge>
-            </IconButton>
+            <p onClick={logoutHandler} style={{cursor: 'pointer'}}>Logout</p>
           </Toolbar>
         </AppBar>
         <Drawer variant="permanent" open={open}>

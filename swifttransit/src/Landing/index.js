@@ -20,7 +20,7 @@ import AddMoneyToWallet from "../Payment/AddMoneyToWallet"
 
 const theme = createTheme();
 
-export default function home() {
+export default function Home() {
 
 
    

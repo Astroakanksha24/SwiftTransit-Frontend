@@ -19,7 +19,7 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 const theme = createTheme();
 
-export default function BookTicket() {
+export default function BookPassCash() {
 
 
    const [thePassword, setThePassword] = useState("")
@@ -87,7 +87,7 @@ export default function BookTicket() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Sign Up
+            Create Ticket
           </Typography>
           <Box component="form" onSubmit={submitForm} noValidate sx={{ mt: 1 }}>
             <TextField

@@ -228,11 +228,48 @@ var username;
           }}
         >
           <Toolbar />
+
+
+
+
+
+
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
+
+          <Grid item xs={12} md={12} lg={12}>
+                <Paper
+                  sx={{
+                    p: 2,
+                    display: 'flex',
+                    flexDirection: 'column',
+                    height: 'auto',
+                    margin: '10px'
+                  }}
+                >
+                <h5>Book Ticket</h5>
+    
+                 <a href="">Book Ticket with Wallet</a> <br />
+
+                 <a href="">Book Ticket with Cash</a> <br />
+
+                 <a href="">Book Ticket with SMS</a> <br />
+
+                <br />
+
+                <h5>Book Day Pass</h5>
+    
+                 <a href="">Book Pass with Wallet</a> <br />
+
+                 <a href="">Book Pass with Cash</a> <br />
+
+                 <a href="">Book Pass with SMS</a> <br />
+                 
+                </Paper>
+              </Grid>
           
             <Grid container spacing={3}>
             
-<a variant="contained" href="/book-ticket" type="button">Book ticket</a><br></br>
+{/* <a variant="contained" href="/book-ticket" type="button">Book ticket</a><br></br> */}
 <TableContainer component={Paper}>
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>

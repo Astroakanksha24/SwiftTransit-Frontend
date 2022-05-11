@@ -4,6 +4,10 @@ import useRazorpay from "react-razorpay";
 import { getToken, getURL } from '../utils';
 import jwt_decode from 'jwt-decode'
 import axios from 'axios';
+import Button from '@mui/material/Button';
+import InputAdornment from '@mui/material/InputAdornment';
+import OutlinedInput from '@mui/material/OutlinedInput';
+import InputLabel from '@mui/material/InputLabel';
 
 export default function AddMoneyToWallet(props) {
 
@@ -118,10 +122,19 @@ export default function AddMoneyToWallet(props) {
   return (
     <div className="App">
       <form onSubmit={formSubmitHandler}>
-        <input type="number" value={amount} name="amount" id="amount" onChange={(e)=>{
-          setAmount(e.target.value)
-        }} required />
-        <button>Pay Now</button>
+      <InputLabel htmlFor="outlined-adornment-amount">Amount</InputLabel>
+          <OutlinedInput
+            id="outlined-adornment-amount"
+            value={amount}
+            onChange={(e)=>{
+              setAmount(e.target.value)
+            }}
+            startAdornment={<InputAdornment position="start">Rs.</InputAdornment>}
+            label="Amount" required
+          />
+          <br></br>
+        <Button variant="contained" type="submit">Pay Now</Button>
+       
       </form>
      
     </div>
