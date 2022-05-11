@@ -2,7 +2,12 @@ import logo from './logo.svg';
 import './App.css';
 import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import React from 'react';
-
+import UserLogin from './login/UserLogin';
+import UserSignup from './Signup/UserSignup';
+import ConductorLogin from './login/ConductorLogin';
+import AdminLogin from './login/AdminLogin';
+import CreateConductor from './Signup/CreateConductor';
+//import Main from './Main/Landing';
 function App() {
     
   return (
@@ -12,7 +17,7 @@ function App() {
           <div>
             <Routes>
               
-              <Route exact path="/" element={<Main/>} />
+              {/*{Route exact path="/" element={<Main/>} />*/}
               <Route exact path="/conductor-login" element={<ConductorLogin/>} />
               <Route exact path="/user-login" element={<UserLogin/>} />
               <Route exact path="/admin-login" element={<AdminLogin/>} />

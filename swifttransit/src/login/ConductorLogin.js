@@ -1,6 +1,6 @@
 import * as React from 'react';
 import axios from 'axios';
-import { getURL } from './utils';
+import { getURL } from '../utils/index';
 
 class ConductorLogin extends React.Component
 {

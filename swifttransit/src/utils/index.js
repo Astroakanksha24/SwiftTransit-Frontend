@@ -3,5 +3,5 @@ export const getToken = () => {
   };
 
   export const getURL = () => {
-    return "https://asia-south1-swifttransit-a32f8.cloudfunctions.net/api";
+    return "https://asia-south1-swifttransit-a32f8.cloudfunctions.net/api/";
   };

@@ -1,7 +1,6 @@
 import * as React from 'react';
-import './Login.css';
 import axios from 'axios';
-import { getURL } from './utils';
+import { getURL } from '../utils/index';
 
 class UserSignup extends React.Component
 {
@@ -88,16 +87,17 @@ class UserSignup extends React.Component
                 <div class="login-form">
                     <center>
                     <form onSubmit={this.submitForm}>
-                        <h3>The Campus Bugle</h3>
+                        <h3>Sign Up</h3>
                         <p>{this.state.message}</p>
-                        <input type="email" name="email" placeholder="Email" onChange={this.setInput} value={this.state.email}  required></input><br></br>
-                        <input type="text" name="first_name" placeholder="First Name" onChange={this.setInput} value={this.state.first_name}  required></input><br></br>
-                        <input type="text" name="last_name" placeholder="last Name" onChange={this.setInput} value={this.state.last_name}  required></input><br></br>
-                        <label for='bio'>Bio</label><br></br>
-                        <textarea id="bio" name="bio" onChange={this.setInput} value={this.state.bio}  required></textarea><br></br>
-                        <label for="profile_picture">Profile Picture</label><br></br>
-                        <input type="file" name="profile_picture" onChange={this.setFileInput} required></input><br></br>
-                        <input type="password" name="password" placeholder="Password" onChange={this.setInput} value={this.state.password}  required></input><br></br>
+                        <input type="text" name="username" placeholder="Username" className="form-control" aria-label="default input example" onChange={this.setInput} value={this.state.username}  required></input><br></br>
+                        <input type="password" name="password" placeholder="Password" className="form-control" onChange={this.setInput} value={this.state.password}  required></input><br></br>
+                        <input type="email" name="email" placeholder="Email" className="form-control" onChange={this.setInput} value={this.state.email}  required></input><br></br>
+                        <input type="text" name="first_name" placeholder="First Name" className="form-control" onChange={this.setInput} value={this.state.first_name}  required></input><br></br>
+                        <input type="text" name="last_name" placeholder="last Name" className="form-control" onChange={this.setInput} value={this.state.last_name}  required></input><br></br>
+                        <input type="text" name="phone" placeholder="Mobile Number" className="form-control" onChange={this.setInput} value={this.state.phone}  required></input><br></br>
+                        <label for="adhaar">Adhaar Card</label><br></br>
+                        <input type="file" name="adhaar" onChange={this.setFileInput} required></input><br></br>
+
                         <input type="submit" value="Signup"></input>
                     </form>
                     </center>
