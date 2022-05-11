@@ -46,7 +46,7 @@ export default function UserLogin() {
               const data = response.data;
              console.log("login");
               localStorage.setItem("token", data.token);
-              window.location = "/";
+              window.location = "/admin-dashboard";
               }
       })
       .catch((err) => {
