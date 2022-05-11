@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { useEffect, useState } from 'react';
 import axios from 'axios';
 import { getURL } from '../utils/index';
 import Avatar from '@mui/material/Avatar';
@@ -17,74 +18,51 @@ import { createTheme, ThemeProvider } from '@mui/material/styles';
 
 
 const theme = createTheme();
-class UserLogin extends React.Component
-{
-    constructor() {
-        super();
-        this.state = {
-         username: '',
-         password: '',
-         message:'',
-         open: '',
-        };
-      }
 
-    setInput = e => {
-    this.setState({
-        [e.target.name]: e.target.value
-    });
-    }
+export default function UserLogin() {
 
-    submitForm = e => {
-        e.preventDefault();
-        const thatURL = getURL() + "user-login";
 
-        axios.post(
-            thatURL,
-            {
-                username: this.state.username,
-                password: this.state.password,
-            },
-            {
-                headers: {
-                    "Content-Type": "application/json",
-                   
-                },
-            }
-        )
-        .then((response) => {
-           if (response.status === 200) {
-                const data = response.data;
-               
- 
-                localStorage.setItem("token", data.token);
-                window.location = "/";
-                }
-        })
-        .catch((err) => {
+   const [thePassword, setThePassword] = useState("")
+   const [theUsername, setTheUsername] = useState("")
+
+    const submitForm = e => {
+      e.preventDefault();
+      const thatURL = getURL() + "user-login";
+      console.log(theUsername)
+      axios.post(
+          thatURL,
+          {
+              username: theUsername,
+              password: thePassword,
+          },
+          {
+              headers: {
+                  "Content-Type": "application/json",
+              },
+          }
+      )
+      .then((response) => {
+         if (response.status === 201) {
+              const data = response.data;
+             console.log("login");
+              localStorage.setItem("token", data.token);
+              window.location = "/";
+              }
+      })
+      .catch((err) => {
+          
+          if(err.message==="Request failed with status code 404")
+          {
             console.log(err.message);
-            if(err.message==="Request failed with status code 404")
-            {
-                this.setState({
-                    open: true,
-                    message: "Username does not exist",
-                    });
-                    return 0;
-            }
-            if(err.message==="Request failed with status code 401")
-            {
-                this.setState({
-                    open: true,
-                    message: "Invalid password",
-                    });
-                    return 0; 
-            }
-        });
-    };
-    render(){
-        return(
-            <>
-               <ThemeProvider theme={theme}>
+              alert("Invalid details");
+          }
+          
+      });
+  };
+
+  return (
+    <>
+     <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -101,17 +79,18 @@ class UserLogin extends React.Component
           <Typography component="h1" variant="h5">
             Sign in
           </Typography>
-          <Box component="form" onSubmit={this.submitForm} noValidate sx={{ mt: 1 }}>
+          <Box component="form" onSubmit={submitForm} noValidate sx={{ mt: 1 }}>
             <TextField
               margin="normal"
               required
               fullWidth
-              id="email"
-              label="UserName"
-              name="email"
+              id="username"
+              label="Username"
+              name="username"
               autoComplete="email"
               autoFocus
-            />
+              onChange={(e)=>setTheUsername(e.target.value)} value={theUsername}          
+              />
             <TextField
               margin="normal"
               required
@@ -121,11 +100,8 @@ class UserLogin extends React.Component
               type="password"
               id="password"
               autoComplete="current-password"
-            />
-            <FormControlLabel
-              control={<Checkbox value="remember" color="primary" />}
-              label="Remember me"
-            />
+              onChange={(e)=>setThePassword(e.target.value)} value={thePassword}   
+              />
             <Button
               type="submit"
               fullWidth
@@ -148,12 +124,9 @@ class UserLogin extends React.Component
             </Grid>
           </Box>
         </Box>
-        <Copyright sx={{ mt: 8, mb: 4 }} />
+        
       </Container>
     </ThemeProvider>
             </>
-        )
-    }
+  )
 }
-
-export default UserLogin;
