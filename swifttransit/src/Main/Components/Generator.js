@@ -21,7 +21,7 @@ export default function Generator(props) {
     <container>
       {imageUrl ? (
         <a href={imageUrl} download>
-            <img src={imageUrl} alt="img"/>
+            <img src={imageUrl} alt="img" />
       </a>) : null}
   </container>
   )

@@ -99,17 +99,16 @@ export default function BookPassCash() {
               fullWidth
               variant="contained"
               value="Signup"
-              sx={{ mt: 3, mb: 2 }}
+              sx={{ mt: 2, mb: 3 }}
             >
               Book
             </Button>
-            
+          
           </Box>
-          <br />
-          <br />
           {theTicketID.length>0 ? <>
             <Generator text={theTicketID} />
           </> : <></>}
+          
         </Box>
         
       </Container>

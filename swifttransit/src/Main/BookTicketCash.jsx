@@ -51,7 +51,6 @@ export default function BookTicketCash() {
       }
     }
 
-
    const [theQty, setTheQty] = useState(1)
    const [theTicketID, setTheTicketID] = useState("")
 

@@ -124,7 +124,7 @@ var username;
     const token = getToken();
     var decoded = jwt_decode(token);
     username = decoded["data"]["data"]["_id"];
-        const getTicketsURL = getURL()+ 'bus-travel-ticket/tickets-of-user' + username;
+        const getTicketsURL = getURL()+ 'bus-travel-ticket/tickets-of-user/' + username;
         axios.get(getTicketsURL,
             {headers: {
             "Content-Type": "application/json",
@@ -132,8 +132,8 @@ var username;
         }})
         .then(res => {
             console.log(res.data);
-            const data=res.data;
-            setrows(data);
+            
+            setrows(res.data);
             console.log(rows);
             console.log("run");
             
@@ -221,33 +221,19 @@ var username;
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
 <TableContainer component={Paper}>
-      <Table sx={{ minWidth: 650 }} aria-label="simple table">
-        <TableHead>
-          <TableRow>
-            <TableCell>Bus ID</TableCell>
-            <TableCell align="right">Conductor ID</TableCell>
-            <TableCell align="right">Trip Status</TableCell>
-            {/* <TableCell align="right">AAdhar No</TableCell> */}
-            <TableCell align="right">Start time</TableCell>
-          </TableRow>
-        </TableHead>
-        <TableBody>
-          {rows.map((row) => (
+      {
+      
+        rows.map((row,i) => (
             
-            <TableRow
-              key={row.name}
-              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
-            >
-              <TableCell component="th" scope="row">
-                {row.busID}
-              </TableCell>
-              <TableCell align="right">{row.conductorID}</TableCell>
-              <TableCell align="right">{row.tripStatus}</TableCell>
-              <TableCell align="right">{row.startTime}</TableCell>
-            </TableRow>
-          ))}
-        </TableBody>
-      </Table>
+          <div className='ticket-card'>
+            Source: {row.source}<br/>
+            Destination: {row.destination}<br/>
+            Price per ticket: {row.price}<br/>
+            Quantity: {row.quantity}<br/>
+            Day pass:{row.isDayPass?"Yes":"No"}<br/>
+          </div>
+        ))}
+      
     </TableContainer>
             </Grid>
             <Copyright sx={{ pt: 4 }} />
