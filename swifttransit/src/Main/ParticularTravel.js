@@ -253,7 +253,9 @@ var username;
                  <a href={"/bus-travel/"+travel_id+"/"+"book-pass-wallet"}>Book Pass with Wallet</a> <br />
                  <a href={"/bus-travel/"+travel_id+"/"+"book-pass-sms"}>Book Pass with SMS</a> <br />
                  <a href={"/bus-travel/"+travel_id+"/"+"book-pass-cash"}>Book Pass with Cash</a> <br />
-
+                  <br></br>
+                  <a href={"/bus-travel/"+travel_id+"/verify-smart-ticket"}>Verify Smart Ticket</a> <br />
+                  <a href={"/bus-travel/"+travel_id+"/verify-sms-ticket"}>Verify SMS Ticket</a> <br />
                  
                 </Paper>
               </Grid>

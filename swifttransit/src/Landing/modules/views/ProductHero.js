@@ -2,7 +2,7 @@ import * as React from 'react';
 import Button from '../components/Button';
 import Typography from '../components/Typography';
 import ProductHeroLayout from './ProductHeroLayout';
-
+import { BottomNavigation } from '@mui/material';
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -29,16 +29,16 @@ const bull = (
   </Box>
 );
 
-const backgroundImage =
-  'https://images.unsplash.com/photo-1534854638093-bada1813ca19?auto=format&fit=crop&w=1400&q=80';
+const backgroundImage ="https://www.luckystarbus.com/normal/pic/nightbus.png" ;
 
 export default function ProductHero() {
   return (
     <ProductHeroLayout
       sxBackground={{
-        // backgroundImage: `url(${backgroundImage})`,
-        backgroundColor: '#7fc7d9',
+        backgroundImage: `url(${backgroundImage})`,
+        // backgroundColor: '#7fc7d9',
         backgroundPosition: 'center',
+        opacity:'0.2'
       }}
     >
       {/* Increase the network loading priority of the background image. */}
@@ -48,7 +48,7 @@ export default function ProductHero() {
         alt="increase priority"
       />
       <Typography color="inherit" align="center" variant="h2" marked="center">
-        Upgrade your Sundays
+        Let's Start Something New
       </Typography>
       <Typography
         color="inherit"
@@ -56,9 +56,9 @@ export default function ProductHero() {
         variant="h5"
         sx={{ mb: 4, mt: { sx: 4, sm: 10 } }}
       >
-        Enjoy secret offers up to -70% off the best luxury hotels every Sunday.
+        {/* Enjoy secret offers up to -70% off the best luxury hotels every Sunday. */}
       </Typography>
-      <Button
+      {/* <Button
         color="secondary"
         variant="contained"
         size="large"
@@ -67,7 +67,7 @@ export default function ProductHero() {
         sx={{ minWidth: 200 }}
       >
         Register
-      </Button>
+      </Button> */}
       <Typography variant="body2" color="inherit" sx={{ mt: 2 }}>
         
       </Typography>
@@ -79,17 +79,17 @@ export default function ProductHero() {
 
 
 
-      <Grid container spacing={1}>
+      <Grid container spacing={25}>
         <Grid item xs={4}>
           <Button
           color="secondary"
           variant="contained"
           size="large"
           component="a"
-          href="/user-signup"
-          sx={{ minWidth: 200 }}
+          href="/admin-login"
+          sx={{ minWidth: 70 }}
         >
-          Register
+          Admin Login
         </Button>
         </Grid>
 
@@ -99,28 +99,39 @@ export default function ProductHero() {
           variant="contained"
           size="large"
           component="a"
-          href="/user-signup"
-          sx={{ minWidth: 200 }}
+          href="/conductor-login"
+          sx={{ minWidth: 70 }}
         >
-          Register
+          Conductor Login
         </Button>
         </Grid>
 
-        <Grid item xs={12}>
+        <Grid item xs={4}>
           <Button
           color="secondary"
           variant="contained"
           size="large"
           component="a"
-          href="/user-signup"
-          sx={{ minWidth: 200 }}
+          href="/user-login"
+          sx={{ minWidth: 70 }}
         >
-          Register
+          User Login
         </Button>
+
+
+        {/* <BottomNavigation
+          showLabels
+          value={value}
+          onChange={(event, newValue) => {
+            setValue(newValue);
+          }}
+        >
+          <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
+        </BottomNavigation> */}
         </Grid>
 
       </Grid>
-
+       
 
       {/* <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)' }}>
       <Item>1</Item>

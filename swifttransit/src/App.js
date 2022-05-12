@@ -31,6 +31,9 @@ import BookPassSMS from './Main/BookPassSMS'
 import UserScanCash from './Main/UserScanCash'
 import UserScanWallet from './Main/UserScanWallet'
 
+import VerifySmartTicket from './Main/VerifySmartTicket';
+import VerifySMSTicket from './Main/VerifySMSTicket';
+
 
 //import Main from './Main/Landing';
 function App() {
@@ -66,6 +69,9 @@ function App() {
 
               <Route exact path="/user/scan-cash" element={<UserScanCash/>} />
               <Route exact path="/user/scan-wallet" element={<UserScanWallet/>} />
+
+              <Route exact path="/bus-travel/:id/verify-sms-ticket" element={<VerifySMSTicket/>} />
+              <Route exact path="/bus-travel/:id/verify-smart-ticket" element={<VerifySmartTicket/>} />
 
             </Routes>
             

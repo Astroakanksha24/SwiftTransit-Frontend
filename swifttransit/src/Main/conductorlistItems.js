@@ -18,19 +18,19 @@ export const mainListItems = (
       </ListItemIcon>
       <a href="/conductor-dashboard"  style={{ textDecoration: 'none', color: 'black' }}><ListItemText primary="Dashboard" /></a>
     </ListItemButton>
+    <ListItemButton>
+      <ListItemIcon>
+        <PeopleIcon />
+      </ListItemIcon>
+      <a href="/verify-smart-wallet"  style={{ textDecoration: 'none', color: 'black' }}><ListItemText primary="Verify Smart ticket" /></a>
+    </ListItemButton>
+    <ListItemButton>
+      <ListItemIcon>
+        <PeopleIcon />
+      </ListItemIcon>
+      <a href="/verify-sms-cash"  style={{ textDecoration: 'none', color: 'black' }}><ListItemText primary="Verify SMS ticket" /></a>
+    </ListItemButton>
     {/* <ListItemButton>
-      <ListItemIcon>
-        <PeopleIcon />
-      </ListItemIcon>
-      <a href="/conductor-data"  style={{ textDecoration: 'none', color: 'black' }}><ListItemText primary="Conductors" /></a>
-    </ListItemButton>
-    <ListItemButton>
-      <ListItemIcon>
-        <PeopleIcon />
-      </ListItemIcon>
-      <a href="/customer-data"  style={{ textDecoration: 'none', color: 'black' }}><ListItemText primary="Customers" /></a>
-    </ListItemButton>
-    <ListItemButton>
       <ListItemIcon>
         <BarChartIcon />
       </ListItemIcon>
