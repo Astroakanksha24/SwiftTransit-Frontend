@@ -39,7 +39,7 @@ export default function UserScanWallet() {
          console.log(err.response.data)
          console.log(err.response.message)
          console.log(err.response )
-         alert("Some error occurred");
+         alert(err.response.message);
          window.location='/user-dashboard'
          return;
       });

@@ -145,7 +145,7 @@ export default function BookTicketCash() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Book Daily Pass With Cash
+            Book Daily Ticket With Cash
           </Typography>
           <Box component="form" onSubmit={submitForm} noValidate sx={{ mt: 1 }}>
             

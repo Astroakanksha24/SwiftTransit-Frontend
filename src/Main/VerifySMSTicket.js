@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { QrReader } from 'react-qr-reader';
 import { getURL, getToken } from '../utils/index';
 import jwt_decode from "jwt-decode";
+import Button from '@mui/material/Button';
 import {
   BrowserRouter as Router,
   Switch,
@@ -54,7 +55,8 @@ export default function VerifySMSTicket() {
               <input onChange={(e)=>{
                 setTheSMSTicket(e.target.value)
               }} type="text" name="smsTicketID" value={theSMSTicket} id="smsTicketID" />
-              <button type="submit">Validate</button>
+             <br/>
+              <Button variant="contained" type="submit">Submit</Button>
             </form>
         </>
     </div>

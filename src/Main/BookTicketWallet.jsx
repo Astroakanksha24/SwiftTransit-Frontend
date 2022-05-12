@@ -14,6 +14,10 @@ import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import Container from '@mui/material/Container';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
+import Select, { SelectChangeEvent } from '@mui/material/Select';
+import InputLabel from '@mui/material/InputLabel';
+import MenuItem from '@mui/material/MenuItem';
+
 
 import {
   BrowserRouter as Router,
@@ -28,28 +32,63 @@ const theme = createTheme();
 
 var travel_id;
 
-export default function BookPassWallet() {
+export default function BookTicketWallet() {
 
   let { id } = useParams();
     travel_id=id;
 
+    let getPriceOfJourney = (source, destinaton, ticketPrices) => {
+      let s1 = source+destination;
+      let s2 = destination+source
+      let combined = [s1,s2]
+      for(let i=0; i<ticketPrices.length; i++)
+      {
+        let ss = ticketPrices[i]['stop1']+ticketPrices[i]['stop2']
+        if(combined.includes(ss))
+        {
+          return parseInt(ticketPrices[i]['cost'])
+        }
+      }
+    }
 
    const [theQty, setTheQty] = useState(1)
    const [theTicketID, setTheTicketID] = useState("")
 
     const submitForm = e => {
       e.preventDefault();
+
+      if(source == '')
+      {
+        alert("Please select a source.");
+        return;
+      }
+
+      if(destination == '')
+      {
+        alert("Please select a destination.");
+        return;
+      }
+
+      if(destination == source)
+      {
+        alert("Source and Destination cannot be the same.");
+        return;
+      }
+
+      let thePrice = getPriceOfJourney(source, destination, theBusData['ticketPrices']);
+
+
       const thatURL = getURL() + "bus-travel-ticket/create-ticket-by-conductor";
       axios.post(
           thatURL,
           {
             "busTravelID": travel_id,
             "quantity": theQty,
-            "isDayPass": true,
-            "price": 50*theQty,
-            "source": "",
-            "destination": "",
-            "perTicketCost": 50
+            "isDayPass": false,
+            "price": thePrice*theQty,
+            "source": source,
+            "destination": destination,
+            "perTicketCost": thePrice
         },
           {
               headers: {
@@ -69,9 +108,29 @@ export default function BookPassWallet() {
       });
   };
 
+  const [theBusData, setTheBusData] = useState({})
+
+  useEffect(()=>{
+    const URL = getURL() + "bus-travel/bus-details/"+travel_id
+    axios.get(URL)
+    .then((res)=>{
+      let data = res.data;
+      setTheBusData(data)
+      setShowScreen(true)
+    })
+    .catch((err)=>{
+      alert(err.response.message)
+    })
+  }, [])
+
+  const [source, setSource] = useState("")
+  const [destination, setDestination] = useState("")
+
+  const [showScreen, setShowScreen] = useState(false)
+
   return (
-    <>
-     <ThemeProvider theme={theme}>
+    <>{
+      showScreen ? <ThemeProvider theme={theme}>
       <Container component="main" maxWidth="xs">
         <CssBaseline />
         <Box
@@ -86,13 +145,42 @@ export default function BookPassWallet() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Book Daily Pass With Wallet
+            Book Daily Ticket With Wallet
           </Typography>
           <Box component="form" onSubmit={submitForm} noValidate sx={{ mt: 1 }}>
             
           <TextField inputProps={{ inputMode: 'numeric', pattern: '[0-9]*' }} onChange={(e)=>{
             setTheQty(e.target.value)
           }} required={true} value={theQty} label="Quantity" />
+
+          <br />
+
+          <Select
+          labelId=""
+          id="demo-simple-select"
+          value={source}
+          label="Source"
+          onChange={(e)=>{
+            setSource(e.target.value)
+          }}
+          >
+          {theBusData['stops'].map((e,i)=><MenuItem key={i} value={e}>{e}</MenuItem>)}
+          
+        </Select>
+
+        <br />
+
+        <Select
+          labelId=""
+          id="demo-simple-select"
+          value={destination}
+          label="Destination"
+          onChange={(e)=>{
+            setDestination(e.target.value)
+          }}
+          >
+          {theBusData['stops'].map((e,i)=><MenuItem key={i} value={e}>{e}</MenuItem>)}
+        </Select>
 
           
 
@@ -115,7 +203,8 @@ export default function BookPassWallet() {
         </Box>
         
       </Container>
-    </ThemeProvider>
+    </ThemeProvider> : <></>
+    }
             </>
   )
 }

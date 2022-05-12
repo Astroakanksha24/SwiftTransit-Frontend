@@ -17,6 +17,7 @@ export default function Scanner(props){
             console.info(error);
           }
         }}
+        
         style={{ width: '80vw', height: '80vh' }}
       />
       <p>{data}</p>
