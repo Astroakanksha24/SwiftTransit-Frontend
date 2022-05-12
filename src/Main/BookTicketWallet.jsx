@@ -104,7 +104,7 @@ export default function BookTicketWallet() {
           }
       })
       .catch((err) => {
-         console.log(err)
+        alert(err.response.data.message);
       });
   };
 

@@ -36,7 +36,7 @@ export const mainListItems = (
       <ListItemIcon>
         <BarChartIcon />
       </ListItemIcon>
-      <ListItemText primary="All tickets" />
+      <a href="/user/all-user-tickets"  style={{ textDecoration: 'none', color: 'black' }}><ListItemText primary="All Tickets" /></a>
     </ListItemButton>
     {/*<ListItemButton>
       <ListItemIcon>

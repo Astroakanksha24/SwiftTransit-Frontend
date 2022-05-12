@@ -4,6 +4,8 @@ import { QrReader } from 'react-qr-reader';
 import { getURL, getToken } from '../utils/index';
 import jwt_decode from "jwt-decode";
 import Button from '@mui/material/Button';
+
+import TextField from '@mui/material/TextField';
 import {
   BrowserRouter as Router,
   Switch,
@@ -51,10 +53,19 @@ export default function VerifySMSTicket() {
     <div>
         <>
             <form onSubmit={formSubmitHandler}>
-              <label htmlFor="smsTicketID">SMS UID</label> <br />
-              <input onChange={(e)=>{
+             
+              <TextField
+              margin="normal"
+              required
+              id="smsTicketID"
+              label="SMS UID"
+              name="smsTicketID"
+              
+              autoFocus
+              onChange={(e)=>{
                 setTheSMSTicket(e.target.value)
-              }} type="text" name="smsTicketID" value={theSMSTicket} id="smsTicketID" />
+              }} value={theSMSTicket}          
+              />
              <br/>
               <Button variant="contained" type="submit">Submit</Button>
             </form>

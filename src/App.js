@@ -34,6 +34,7 @@ import UserScanWallet from './Main/UserScanWallet'
 import VerifySmartTicket from './Main/VerifySmartTicket';
 import VerifySMSTicket from './Main/VerifySMSTicket';
 import AllUserTickets from './Main/AllUserTickets';
+import BusData from './Main/BusData';
 
 
 //import Main from './Main/Landing';
@@ -75,6 +76,8 @@ function App() {
               <Route exact path="/bus-travel/:id/verify-smart-ticket" element={<VerifySmartTicket/>} />
 
               <Route exact path="/user/all-user-tickets" element={<AllUserTickets/>} />
+
+              <Route exact path="/buses/all" element={<BusData/>} />
 
             </Routes>
             

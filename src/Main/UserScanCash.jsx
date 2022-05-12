@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { QrReader } from 'react-qr-reader';
 import { getURL, getToken } from '../utils/index';
 import jwt_decode from "jwt-decode";
+import Button from '@mui/material/Button';
 
 export default function UserScanCash() {
     const [data, setData] = useState('');
@@ -55,6 +56,7 @@ export default function UserScanCash() {
   return (
     <div>
         <>
+            <h3 style={{margin: '10px auto', textAlign: 'center'}}>Scan for Cash</h3>
             <QrReader
                 onResult={(result, error) => {
                 if (!!result) {
@@ -68,9 +70,8 @@ export default function UserScanCash() {
             />
             {data.length>0 ? <>
             <div>
-                <button onClick={approveTicketHandler}>
-                    Approve
-                </button>
+            <Button variant="contained" onClick={approveTicketHandler}>Approve</Button>
+               
             </div>
             </> : <></> }
         </>

@@ -65,7 +65,7 @@ export default function BookPassWallet() {
           }
       })
       .catch((err) => {
-         alert(err.response.message)
+         alert(err.response.status);
       });
   };
 

@@ -28,7 +28,8 @@ import TableCell from '@mui/material/TableCell';
 import TableContainer from '@mui/material/TableContainer';
 import TableHead from '@mui/material/TableHead';
 import TableRow from '@mui/material/TableRow';
-import { mainListItems, secondaryListItems } from './adminlistItems';
+import { mainListItems, secondaryListItems } from './userlistItems';
+import Generator from './Components/Generator';
 
 
 export default function AllUserTickets() {
@@ -224,13 +225,14 @@ var username;
       {
       
         rows.map((row,i) => (
-            
-          <div className='ticket-card'>
-            Source: {row.source}<br/>
-            Destination: {row.destination}<br/>
+          <div className='ticket-card' style={{margin: '10px auto'}}>
+            Source: {row.source=="" ? 'N/A' : row.source}<br/>
+            Destination: {row.destination=="" ? 'N/A' : row.destination}<br/>
             Price per ticket: {row.price}<br/>
             Quantity: {row.quantity}<br/>
-            Day pass:{row.isDayPass?"Yes":"No"}<br/>
+            Type: {row.isDayPass?"Day Pass":"Ticket"}<br/>
+            QR Code: <br /><br />
+            <Generator text={row['_id']} />
           </div>
         ))}
       

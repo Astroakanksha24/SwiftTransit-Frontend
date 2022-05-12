@@ -3,6 +3,7 @@ import React, { useState, useEffect } from 'react';
 import { QrReader } from 'react-qr-reader';
 import { getURL, getToken } from '../utils/index';
 import jwt_decode from "jwt-decode";
+import Button from '@mui/material/Button';
 
 export default function UserScanWallet() {
     const [data, setData] = useState('');
@@ -39,7 +40,7 @@ export default function UserScanWallet() {
          console.log(err.response.data)
          console.log(err.response.message)
          console.log(err.response )
-         alert(err.response.message);
+         alert(err.response.data.message);
          window.location='/user-dashboard'
          return;
       });
@@ -68,9 +69,8 @@ export default function UserScanWallet() {
             />
             {data.length>0 ? <>
             <div>
-                <button onClick={approveTicketHandler}>
-                    Approve
-                </button>
+            <Button variant="contained" onClick={approveTicketHandler}>Approve</Button>
+               
             </div>
             </> : <></> }
         </>

@@ -182,17 +182,12 @@ const addBusTravel = e => {
   .then((response) => {
      if (response.status === 201) {
           const data = response.data;
-          console.log(data);
-          }
+          alert("Ride has started")
+          window.location='/bus-travels'
+      }
   })
   .catch((err) => {
-      
-      if(err.response.status==404)
-      {
-        console.log(err.message);
-        alert("Invalid credentials");
-      }
-      
+    alert("Some Error Occurred");
   });
 };
 

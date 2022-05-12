@@ -245,7 +245,7 @@ const logoutHandler = () => {
               <TableCell component="th" scope="row">
                 <a href={"/bus-travel/"+row['_id']}>{row.busID}</a>
               </TableCell>
-              <TableCell align="right">{row.conductorLicenseNumber}</TableCell>
+              <TableCell align="right">{row.conductorID}</TableCell>
               <TableCell align="right">{row.tripStatus}</TableCell>
               <TableCell align="right">{row.startTime}</TableCell>
             </TableRow> 

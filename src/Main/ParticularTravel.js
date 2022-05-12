@@ -267,14 +267,15 @@ var username;
       <Table sx={{ minWidth: 650 }} aria-label="simple table">
         <TableHead>
           <TableRow>
-            <TableCell align="right">Travel ID</TableCell>
-            <TableCell align="right">busTravelID</TableCell>
-            <TableCell align="right">quantity</TableCell>
-            <TableCell align="right">isDayPass</TableCell>
-            <TableCell align="right">price</TableCell>
+           
             <TableCell align="right">source</TableCell>
             <TableCell align="right">destination</TableCell>
+           
+            <TableCell align="right">isDayPass</TableCell>
+            <TableCell align="right">quantity</TableCell>
+            
             <TableCell align="right">perTicketCost</TableCell>
+            <TableCell align="right">price</TableCell>
             <TableCell align="right">isWallet</TableCell>
             <TableCell align="right">ticketStatus</TableCell>
           </TableRow>
@@ -289,16 +290,17 @@ var username;
             >
             
               <TableCell component="th" scope="row">
-                {row._id}
+              {row.source?<>{row.source}</>:"All stops"}
               </TableCell>
-            <TableCell align="right">{row.busTravelID}</TableCell>
+              
+            <TableCell align="right">{row.destination?<>{row.destination}</>:"All stops"}</TableCell>
+           
+            <TableCell align="right">{row.isDayPass?"Yes":"No"}</TableCell>
+            
             <TableCell align="right">{row.quantity}</TableCell>
-            <TableCell align="right">{row.isDayPass}</TableCell>
-            <TableCell align="right">{row.price}</TableCell>
-            <TableCell align="right">{row.source}</TableCell>
-            <TableCell align="right">{row.destination}</TableCell>
             <TableCell align="right">{row.perTicketCost}</TableCell>
-            <TableCell align="right">{row.isWallet}</TableCell>
+            <TableCell align="right">{row.price}</TableCell>
+            <TableCell align="right">{row.isWallet?"Yes":"No"}</TableCell>
             <TableCell align="right">{row.ticketStatus}</TableCell>
             </TableRow> 
           ))}
