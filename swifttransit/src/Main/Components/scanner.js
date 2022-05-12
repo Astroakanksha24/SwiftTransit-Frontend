@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import { QrReader } from 'react-qr-reader';
-
-
+import adapter from 'webrtc-adapter';
 
 export default function Scanner(props){
   const [data, setData] = useState('No result');

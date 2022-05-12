@@ -44,7 +44,7 @@ export default function BookPassCash() {
           thatURL,
           {
             "busTravelID": travel_id,
-            "quantity": 1,
+            "quantity": theQty,
             "isDayPass": true,
             "price": 50*theQty,
             "source": "",

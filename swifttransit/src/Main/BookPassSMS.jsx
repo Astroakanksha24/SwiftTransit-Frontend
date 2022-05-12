@@ -46,7 +46,7 @@ export default function BookPassSMS() {
           {
             "userPhoneNumber": phoneNumber,
             "busTravelID": travel_id,
-            "quantity": 1,
+            "quantity": theQty,
             "isDayPass": true,
             "price": 50*theQty,
             "source": "",
@@ -88,7 +88,7 @@ export default function BookPassSMS() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Book Daily Pass With Cash
+            Book Daily Pass With SMS
           </Typography>
           <Box component="form" onSubmit={submitForm} noValidate sx={{ mt: 1 }}>
             

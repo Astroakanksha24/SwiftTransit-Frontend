@@ -24,21 +24,21 @@ export const mainListItems = (
       <ListItemIcon>
         <MoneyIcon />
       </ListItemIcon>
-      <a href="/user-scanner-cash"  style={{ textDecoration: 'none', color: 'black' }}><ListItemText primary="Scan for cash" /></a>
+      <a href="/user/scan-cash"  style={{ textDecoration: 'none', color: 'black' }}><ListItemText primary="Scan for cash" /></a>
     </ListItemButton>
     <ListItemButton>
       <ListItemIcon>
         <AccountBalanceWalletIcon />
       </ListItemIcon>
-      <a href="/user-scanner-wallet"  style={{ textDecoration: 'none', color: 'black' }}><ListItemText primary="Scan for wallet" /></a>
+      <a href="/user/scan-wallet"  style={{ textDecoration: 'none', color: 'black' }}><ListItemText primary="Scan for wallet" /></a>
     </ListItemButton>
-    {/*<ListItemButton>
+    <ListItemButton>
       <ListItemIcon>
         <BarChartIcon />
       </ListItemIcon>
-      <ListItemText primary="Buses" />
+      <ListItemText primary="All tickets" />
     </ListItemButton>
-    <ListItemButton>
+    {/*<ListItemButton>
       <ListItemIcon>
         <LayersIcon />
       </ListItemIcon>

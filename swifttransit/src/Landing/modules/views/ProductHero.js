@@ -2,7 +2,8 @@ import * as React from 'react';
 import Button from '../components/Button';
 import Typography from '../components/Typography';
 import ProductHeroLayout from './ProductHeroLayout';
-import { BottomNavigation } from '@mui/material';
+import {BottomNavigation,BottomNavigationAction} from "@mui/material";
+import FavoriteIcon from "@mui/icons-material/Favorite";
 import Box from "@mui/material/Box";
 import Card from "@mui/material/Card";
 import CardActions from "@mui/material/CardActions";
@@ -77,10 +78,10 @@ export default function ProductHero() {
 
 
 
+      <div style={{display: 'flex',  justifyContent:'center', alignItems:'center',paddingLeft:'27%'}}>
 
-
-      <Grid container spacing={25}>
-        <Grid item xs={4}>
+      <Grid container spacing={2}>
+        <Grid item xs={12} style={{paddingLeft:'7%'}}>
           <Button
           color="secondary"
           variant="contained"
@@ -93,7 +94,7 @@ export default function ProductHero() {
         </Button>
         </Grid>
 
-        <Grid item xs={4}>
+        <Grid item xs={12}>
           <Button
           color="secondary"
           variant="contained"
@@ -106,7 +107,7 @@ export default function ProductHero() {
         </Button>
         </Grid>
 
-        <Grid item xs={4}>
+        <Grid item xs={12}  style={{paddingLeft:'7%'}}>
           <Button
           color="secondary"
           variant="contained"
@@ -118,20 +119,19 @@ export default function ProductHero() {
           User Login
         </Button>
 
-
-        {/* <BottomNavigation
-          showLabels
-          value={value}
-          onChange={(event, newValue) => {
-            setValue(newValue);
-          }}
-        >
+        {/* <Paper zDepth={1}>
+        <BottomNavigation>
           <BottomNavigationAction label="Favorites" icon={<FavoriteIcon />} />
-        </BottomNavigation> */}
+        </BottomNavigation>
+         </Paper> */}
         </Grid>
 
       </Grid>
        
+
+      </div>
+
+      
 
       {/* <Box sx={{ display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)' }}>
       <Item>1</Item>

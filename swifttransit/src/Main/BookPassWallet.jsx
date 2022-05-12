@@ -44,7 +44,7 @@ export default function BookPassWallet() {
           thatURL,
           {
             "busTravelID": travel_id,
-            "quantity": 1,
+            "quantity": theQty,
             "isDayPass": true,
             "price": 50*theQty,
             "source": "",
@@ -86,7 +86,7 @@ export default function BookPassWallet() {
             <LockOutlinedIcon />
           </Avatar>
           <Typography component="h1" variant="h5">
-            Book Daily Pass With Cash
+            Book Daily Pass With Wallet
           </Typography>
           <Box component="form" onSubmit={submitForm} noValidate sx={{ mt: 1 }}>
             

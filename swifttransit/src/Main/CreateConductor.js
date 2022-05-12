@@ -53,8 +53,8 @@ export default function CreateConductor() {
          if (response.status === 201) {
               const data = response.data;
              console.log("Created");
-              localStorage.setItem("token", data.token);
-              window.location = "/";
+             alert("Created successfully");
+              window.location = "/admin-dashboard";
               }
       })
       .catch((err) => {
@@ -75,7 +75,7 @@ export default function CreateConductor() {
         <CssBaseline />
         <Box
           sx={{
-            marginTop: 8,
+            marginTop: 3,
             display: 'flex',
             flexDirection: 'column',
             alignItems: 'center',

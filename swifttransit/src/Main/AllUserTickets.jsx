@@ -1,5 +1,7 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
+
+import jwt_decode from "jwt-decode";
 import axios from 'axios';
 import { getURL, getToken } from '../utils/index';
 import { styled, createTheme, ThemeProvider } from '@mui/material/styles';
@@ -20,13 +22,24 @@ import Link from '@mui/material/Link';
 import MenuIcon from '@mui/icons-material/Menu';
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import NotificationsIcon from '@mui/icons-material/Notifications';
+import Table from '@mui/material/Table';
+import TableBody from '@mui/material/TableBody';
+import TableCell from '@mui/material/TableCell';
+import TableContainer from '@mui/material/TableContainer';
+import TableHead from '@mui/material/TableHead';
+import TableRow from '@mui/material/TableRow';
 import { mainListItems, secondaryListItems } from './adminlistItems';
+
+
+export default function AllUserTickets() {
+  
+
+  return <DashboardContent />;
+}
+
 // import Chart from './Chart';
 // import Deposits from './Deposits';
 // import Orders from './Orders';
-
-import jwt_decode from "jwt-decode";
-
 
 function Copyright(props) {
   return (
@@ -39,11 +52,6 @@ function Copyright(props) {
       {'.'} */}
     </Typography>
   );
-}
-
-const logoutHandler = () => {
-  localStorage.setItem("token", "")
-  window.location = "/";
 }
 
 const drawerWidth = 240;
@@ -94,32 +102,54 @@ const Drawer = styled(MuiDrawer, { shouldForwardProp: (prop) => prop !== 'open' 
 
 const mdTheme = createTheme();
 
+
+function createData(username,name,phone,conductorLicenseNumber) {
+    return { username,name,phone,conductorLicenseNumber  }
+}
+const logoutHandler = () => {
+  localStorage.setItem("token", "")
+  window.location = "/";
+}
+  
+
+
 function DashboardContent() {
   const [open, setOpen] = React.useState(true);
+  const [rows, setrows] = useState([]);
   const toggleDrawer = () => {
     setOpen(!open);
   };
-
-  const [userData, setUserData] = useState({})
-
-  React.useEffect(()=>{
+var username;
+  useEffect(()=>{
     const token = getToken();
-    var decoded = jwt_decode(token)
-    let username = decoded["data"]["data"]["_id"];
-    axios.get(`${getURL()}users/user/${username}`)
-    .then((res)=>{
-      let data = res.data;
-      setUserData(data)
-    })
-    .catch((err)=>{
-      console.log(err)
-    })
-  }, [])
-  
-  const logoutHandler = () => {
-    localStorage.setItem("token", "")
-    window.location = "/";
-  }
+    var decoded = jwt_decode(token);
+    username = decoded["data"]["data"]["_id"];
+        const getTicketsURL = getURL()+ 'bus-travel-ticket/tickets-of-user' + username;
+        axios.get(getTicketsURL,
+            {headers: {
+            "Content-Type": "application/json",
+            "authorization": `${token}`
+        }})
+        .then(res => {
+            console.log(res.data);
+            const data=res.data;
+            setrows(data);
+            console.log(rows);
+            console.log("run");
+            
+        })
+        .catch((err) => {
+            console.log(err.message);
+            if(err.message==="Request failed with status code 401")
+            {
+                alert("Something went wrong");
+   
+                return;
+            }
+        }
+
+        )
+},[]);
 
   return (
     <ThemeProvider theme={mdTheme}>
@@ -190,34 +220,35 @@ function DashboardContent() {
           <Toolbar />
           <Container maxWidth="lg" sx={{ mt: 4, mb: 4 }}>
             <Grid container spacing={3}>
-             
-              
-            <Grid item xs={12} md={12} lg={12}>
-                <Paper
-                  sx={{
-                    p: 2,
-                    display: 'flex',
-                    flexDirection: 'column',
-                    height: 240,
-                  }}
-                >
-                 <h3>Hello, {userData['name']}</h3>
-                 <p>
-                   Email - {userData['email']}<br />
-                   Phone Number - {userData['phoneNumber']}<br />
-                   Aadhar Number - {userData['aadharNumber']}<br />
-                 </p>
-
-
-                </Paper>
-              </Grid>
-
-
-
-
-
-
-
+<TableContainer component={Paper}>
+      <Table sx={{ minWidth: 650 }} aria-label="simple table">
+        <TableHead>
+          <TableRow>
+            <TableCell>Bus ID</TableCell>
+            <TableCell align="right">Conductor ID</TableCell>
+            <TableCell align="right">Trip Status</TableCell>
+            {/* <TableCell align="right">AAdhar No</TableCell> */}
+            <TableCell align="right">Start time</TableCell>
+          </TableRow>
+        </TableHead>
+        <TableBody>
+          {rows.map((row) => (
+            
+            <TableRow
+              key={row.name}
+              sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
+            >
+              <TableCell component="th" scope="row">
+                {row.busID}
+              </TableCell>
+              <TableCell align="right">{row.conductorID}</TableCell>
+              <TableCell align="right">{row.tripStatus}</TableCell>
+              <TableCell align="right">{row.startTime}</TableCell>
+            </TableRow>
+          ))}
+        </TableBody>
+      </Table>
+    </TableContainer>
             </Grid>
             <Copyright sx={{ pt: 4 }} />
           </Container>
@@ -225,43 +256,4 @@ function DashboardContent() {
       </Box>
     </ThemeProvider>
   );
-}
-
-export default function AdminDashboard() {
- 
-  useEffect(()=>{
-      
-    console.log("im in main");
-    const token = getToken();
-    
-        const getConductorURL = getURL()+ 'conductors';
-        axios.get(getConductorURL,
-            {headers: {
-            "Content-Type": "application/json",
-            "authorization": `${token}`
-        }})
-        .then(res => {
-            console.log(res.data);
-            console.log("run");
-            
-        })
-        .catch((err) => {
-            console.log(err.message);
-            if(err.message==="Request failed with status code 401")
-            {
-                alert("Something went wrong");
-   
-    return;
-            }
-        }
-
-        )
-    
-    
-            
-    
-    
-},[]);
-
-  return <DashboardContent />;
 }
